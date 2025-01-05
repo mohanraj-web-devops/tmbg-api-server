@@ -16,9 +16,9 @@ export default class Auth {
           request.all().createdBy = actionBy
           request.all().updatedBy = actionBy
         }
-      } catch (error) {
-        console.log('Auth Middleware Error => ', error)
-        throw Exceptions.forbidden('Invalid tokenS')
+      } catch (err) {
+        console.log('Auth Middleware Error => ', err)
+        throw Exceptions.forbidden('Invalid token')
       }
     } else {
       throw Exceptions.badRequest('Require Authorization Header')
