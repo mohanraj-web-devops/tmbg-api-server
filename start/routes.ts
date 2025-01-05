@@ -45,6 +45,10 @@ Route.group(() => {
     Route.patch('/:id', 'SitesController.update').where('id', Route.matchers.number())
     Route.delete('/:id', 'SitesController.delete').where('id', Route.matchers.number())
   }).prefix('site')
+
+  Route.group(() => {
+    Route.post('/', 'TenantsController.create')
+  }).prefix('tenant')
 })
   .prefix('api/v1')
   .middleware('auth')
