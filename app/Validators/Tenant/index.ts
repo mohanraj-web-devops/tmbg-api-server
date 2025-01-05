@@ -1,5 +1,3 @@
-import Create from "./Create";
+import Create from './Create'
 
-export {
-    Create
-}
+export { Create }
