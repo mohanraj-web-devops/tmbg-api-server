@@ -51,7 +51,6 @@ export default class UsersController {
   }
 
   public async getMultiple({ request }: HttpContextContract) {
-    return request
     return await User.query()
       .paginate(DEFAULT_PAGINATION.PAGE, DEFAULT_PAGINATION.LIMIT)
       .then((d) => d.toJSON())
