@@ -25,3 +25,12 @@ Route.get('/', async () => {
 })
 
 Route.post('/register', 'UsersController.register')
+Route.post('/login', 'UsersController.login')
+
+Route.group(() => {
+  Route.group(() => {
+    Route.get('/', 'UsersController.getMultiple')
+  }).prefix('user')
+})
+  .prefix('api/v1')
+  .middleware('auth')
