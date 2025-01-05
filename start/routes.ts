@@ -31,6 +31,20 @@ Route.group(() => {
   Route.group(() => {
     Route.get('/', 'UsersController.getMultiple')
   }).prefix('user')
+
+  Route.group(() => {
+    Route.post('/', 'CustomersController.create')
+    Route.get('/', 'CustomersController.getMultiple')
+    Route.patch('/:id', 'CustomersController.update').where('id', Route.matchers.number())
+    Route.delete('/:id', 'CustomersController.delete').where('id', Route.matchers.number())
+  }).prefix('customer')
+
+  Route.group(() => {
+    Route.post('/', 'SitesController.create')
+    Route.get('/', 'SitesController.getMultiple')
+    Route.patch('/:id', 'SitesController.update').where('id', Route.matchers.number())
+    Route.delete('/:id', 'SitesController.delete').where('id', Route.matchers.number())
+  }).prefix('site')
 })
   .prefix('api/v1')
   .middleware('auth')

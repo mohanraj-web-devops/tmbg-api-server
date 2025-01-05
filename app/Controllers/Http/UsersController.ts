@@ -4,8 +4,8 @@ import Env from '@ioc:Adonis/Core/Env'
 import jwt from 'jsonwebtoken'
 import Exceptions from 'App/Exceptions'
 import User from 'App/Models/User'
-import { register, login } from 'App/Validators/User'
-import { TOKEN_EXPIRE_TIME, DEFAULT_PAGINATION } from 'App/data/consts'
+import { register, login, GetMultiple } from 'App/Validators/User'
+import { TOKEN_EXPIRE_TIME } from 'App/data/consts'
 
 export default class UsersController {
   public async register({ request }: HttpContextContract) {
@@ -51,8 +51,10 @@ export default class UsersController {
   }
 
   public async getMultiple({ request }: HttpContextContract) {
+    const { page, limit, orderByColumn, orderByValue } = await request.validate(GetMultiple)
     return await User.query()
-      .paginate(DEFAULT_PAGINATION.PAGE, DEFAULT_PAGINATION.LIMIT)
+      .orderBy(orderByColumn, orderByValue)
+      .paginate(page, limit)
       .then((d) => d.toJSON())
       .catch((err) => {
         console.log('Error While User GetMultiple => ', err)
