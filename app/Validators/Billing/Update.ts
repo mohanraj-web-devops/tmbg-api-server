@@ -18,10 +18,6 @@ export default class Update {
       rules.exists({
         table: 'tenant_billings',
         column: 'id',
-        where: {
-          is_active: 1,
-          is_archive: false,
-        },
       }),
     ]),
     tenantId: schema.number([
@@ -29,16 +25,12 @@ export default class Update {
       rules.exists({
         table: 'tenant_billings',
         column: 'tenant_id',
-        where: {
-          is_active: 1,
-          is_archive: false,
-        },
       }),
     ]),
-    billingStartDate: schema.date({ format: DATE_FORMAT }),
-    billingEndDate: schema.date({ format: DATE_FORMAT }),
-    startEbRead: schema.number([rules.unsigned()]),
-    endEbRead: schema.number([rules.unsigned()]),
+    billingStartDate: schema.date.optional({ format: DATE_FORMAT }),
+    billingEndDate: schema.date.optional({ format: DATE_FORMAT }),
+    startEbRead: schema.number.optional([rules.unsigned()]),
+    endEbRead: schema.number.optional([rules.unsigned()]),
     updatedBy: schema.string({ trim: true }),
   })
 
