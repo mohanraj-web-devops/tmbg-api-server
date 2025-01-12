@@ -21,7 +21,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
-  return { hello: 'Tenant Monthly Bill Generation' }
+  return { projectName: 'Tenant Monthly Bill Generation' }
 })
 
 Route.post('/register', 'UsersController.register')
@@ -48,7 +48,16 @@ Route.group(() => {
 
   Route.group(() => {
     Route.post('/', 'TenantsController.create')
+    Route.get('/', 'TenantsController.getMultiple')
+    Route.patch('/:id', 'TenantsController.update').where('id', Route.matchers.number())
+    Route.delete('/:id', 'TenantsController.delete').where('id', Route.matchers.number())
   }).prefix('tenant')
+
+  Route.group(() => {
+    Route.post('/', 'TenantBillingsController.create')
+    Route.patch('/:id', 'TenantBillingsController.update').where('id', Route.matchers.number())
+    Route.get('/', 'TenantBillingsController.getMultiple')
+  }).prefix('billing')
 })
   .prefix('api/v1')
   .middleware('auth')

@@ -1,13 +1,13 @@
 import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { DATETIME_FORMAT } from 'App/data/consts'
+import { DATE_FORMAT } from 'App/data/consts'
 
 export default class Create {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
     firstName: schema.string({ trim: true }),
-    lastName: schema.string.nullable({ trim: true }),
+    lastName: schema.string.optional({ trim: true }),
     email: schema.string.optional({ trim: true }, [
       rules.email(),
       rules.unique({
@@ -36,12 +36,13 @@ export default class Create {
         },
       }),
     ]),
-    joiningDate: schema.date({ format: DATETIME_FORMAT }, [rules.beforeOrEqual('today')]),
+    joiningDate: schema.date({ format: DATE_FORMAT }, [rules.beforeOrEqual('today')]),
     rentAmount: schema.number([rules.unsigned()]),
     waterCharge: schema.number([rules.unsigned()]),
     ebUnitRate: schema.number([rules.unsigned()]),
     maintenanceCharge: schema.number([rules.unsigned()]),
-    initalEbReading: schema.number([rules.unsigned()]),
+    initialEbReading: schema.number([rules.unsigned()]),
+    createdBy: schema.string({ trim: true }),
   })
 
   public messages: CustomMessages = {

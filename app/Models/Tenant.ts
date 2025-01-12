@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import TenantBilling from './TenantBilling'
 
 export default class Tenant extends BaseModel {
   @column({ isPrimary: true })
@@ -39,7 +40,7 @@ export default class Tenant extends BaseModel {
   public maintenanceCharge: number
 
   @column()
-  public initalEbReading: number
+  public initialEbReading: number
 
   @column()
   public isActive: number
@@ -52,6 +53,9 @@ export default class Tenant extends BaseModel {
 
   @column()
   public updatedBy: string
+
+  @hasMany(() => TenantBilling)
+  public tenantBilling: HasMany<typeof TenantBilling>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
