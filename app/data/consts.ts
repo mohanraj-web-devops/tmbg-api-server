@@ -9,3 +9,9 @@ export const DEFAULT_ORDER = {
   ASC: 'asc',
   DESC: 'desc',
 }
+
+export const DATETIME_FORMAT = 'yyyy-MM-dd HH:mm:ss'
+
+export const DATE_FORMAT = 'yyyy-MM-dd'
+
+export const DEFAULT_TZ = 'Asia/Kolkata'

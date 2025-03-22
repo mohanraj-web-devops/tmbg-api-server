@@ -19,7 +19,7 @@ export default class GetMultiple {
   public schema = schema.create({
     page: schema.number([rules.unsigned()]),
     limit: schema.number([rules.unsigned()]),
-    orderByValue: schema.enum(Object.values(DEFAULT_ORDER)),
+    orderByValue: schema.enum(['asc', 'desc'] as const),
     orderByColumn: schema.string({ trim: true }),
   })
 
